@@ -1,153 +1,486 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aihua Xie - Personal Page</title>
+    <title>Prof. Aihua Xie - Personal Page</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --bg: #0f0c29;
+            --bg2: #1a1740;
+            --surface: rgba(255,255,255,0.04);
+            --ink: #e8e8f0;
+            --muted: #9898b8;
+            --accent: #7c8cf8;
+            --accent2: #a78bfa;
+            --rule: rgba(255,255,255,0.08);
         }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
 
         body {
             font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
-            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-            color: #e0e0e0;
+            background: linear-gradient(160deg, #0f0c29 0%, #1a1740 40%, #24243e 100%);
+            color: var(--ink);
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            line-height: 1.7;
         }
 
-        .container {
-            max-width: 700px;
-            width: 90%;
+        /* ===== HEADER / HERO ===== */
+        .hero {
             text-align: center;
-            padding: 40px 30px;
+            padding: 80px 24px 60px;
+            background: radial-gradient(ellipse at 50% 0%, rgba(124,140,248,0.12) 0%, transparent 70%);
         }
 
         .avatar {
-            width: 120px;
-            height: 120px;
+            width: 110px; height: 110px;
             border-radius: 50%;
             background: linear-gradient(135deg, #667eea, #764ba2);
-            margin: 0 auto 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 48px;
-            color: white;
-            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+            margin: 0 auto 28px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 44px; color: white; font-weight: 700;
+            box-shadow: 0 6px 30px rgba(102,126,234,0.35);
         }
 
-        h1 {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 8px;
-            color: #ffffff;
+        .hero h1 { font-size: 2.2rem; font-weight: 700; color: #fff; margin-bottom: 6px; }
+
+        .hero .title {
+            font-size: 1.15rem; color: var(--accent); margin-bottom: 16px;
+            font-weight: 500; letter-spacing: 0.5px;
         }
 
-        .subtitle {
-            font-size: 1.1rem;
-            color: #a0a0c0;
-            margin-bottom: 32px;
+        .hero .contact {
+            font-size: 0.88rem; color: var(--muted);
+            display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;
         }
+        .hero .contact a { color: var(--accent); text-decoration: none; }
+        .hero .contact a:hover { text-decoration: underline; }
 
-        .bio {
-            font-size: 1rem;
-            line-height: 1.8;
-            color: #c0c0d0;
-            margin-bottom: 36px;
-            padding: 0 20px;
+        .hero .links {
+            margin-top: 24px;
+            display: flex; justify-content: center; gap: 14px; flex-wrap: wrap;
         }
-
-        .links {
-            display: flex;
-            justify-content: center;
-            gap: 16px;
-            flex-wrap: wrap;
-        }
-
-        .links a {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 24px;
-            border-radius: 24px;
-            text-decoration: none;
-            font-size: 0.95rem;
+        .hero .links a {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 10px 22px; border-radius: 24px;
+            text-decoration: none; font-size: 0.92rem;
+            background: rgba(255,255,255,0.07); color: #fff;
+            border: 1px solid rgba(255,255,255,0.15);
             transition: all 0.3s ease;
         }
-
-        .links a.github {
-            background: rgba(255, 255, 255, 0.1);
-            color: #ffffff;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .links a.github:hover {
-            background: rgba(255, 255, 255, 0.2);
+        .hero .links a:hover {
+            background: rgba(255,255,255,0.14);
             transform: translateY(-2px);
         }
 
-        .section-title {
-            font-size: 1.2rem;
-            color: #8888aa;
-            margin: 40px 0 20px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+        /* ===== NAV ===== */
+        nav {
+            position: sticky; top: 0; z-index: 100;
+            background: rgba(15,12,41,0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--rule);
+            display: flex; justify-content: center; gap: 6px;
+            padding: 12px 16px; flex-wrap: wrap;
+        }
+        nav a {
+            color: var(--muted); text-decoration: none;
+            padding: 6px 16px; border-radius: 16px;
+            font-size: 0.85rem; transition: all 0.25s;
+        }
+        nav a:hover, nav a.active { color: #fff; background: rgba(124,140,248,0.15); }
+
+        /* ===== CONTENT ===== */
+        .content {
+            max-width: 860px; margin: 0 auto;
+            padding: 0 24px 80px;
         }
 
-        .skills {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            flex-wrap: wrap;
+        section { margin-top: 48px; scroll-margin-top: 70px; }
+
+        h2 {
+            font-size: 1.35rem; font-weight: 700; color: #fff;
+            margin-bottom: 20px; padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent);
+            display: inline-block;
         }
 
-        .skill-tag {
-            padding: 6px 16px;
-            border-radius: 16px;
-            background: rgba(102, 126, 234, 0.15);
-            color: #a0b0ff;
-            font-size: 0.85rem;
-            border: 1px solid rgba(102, 126, 234, 0.3);
+        h3 {
+            font-size: 1.05rem; font-weight: 600; color: var(--accent2);
+            margin: 18px 0 8px;
         }
 
+        p { color: var(--ink); margin-bottom: 10px; }
+
+        /* ===== EDUCATION ===== */
+        .edu-item {
+            padding: 14px 20px; margin-bottom: 14px;
+            background: var(--surface); border-radius: 10px;
+            border-left: 3px solid var(--accent);
+        }
+        .edu-item .period { font-size: 0.82rem; color: var(--accent); font-weight: 600; }
+        .edu-item .school { font-size: 0.95rem; color: #fff; margin: 2px 0; }
+        .edu-item .detail { font-size: 0.88rem; color: var(--muted); }
+        .edu-item .supervisor { font-size: 0.85rem; color: var(--muted); font-style: italic; }
+
+        /* ===== EMPLOYMENT ===== */
+        .emp-item {
+            padding: 14px 20px; margin-bottom: 14px;
+            background: var(--surface); border-radius: 10px;
+            border-left: 3px solid var(--accent2);
+        }
+        .emp-item .period { font-size: 0.82rem; color: var(--accent2); font-weight: 600; }
+        .emp-item .role { font-size: 0.95rem; color: #fff; margin: 2px 0; }
+        .emp-item .place { font-size: 0.88rem; color: var(--muted); }
+
+        /* ===== SPECIALIZATIONS ===== */
+        .tags { display: flex; flex-wrap: wrap; gap: 10px; }
+        .tag {
+            padding: 8px 18px; border-radius: 20px;
+            background: rgba(124,140,248,0.1); color: var(--accent);
+            font-size: 0.88rem; border: 1px solid rgba(124,140,248,0.2);
+        }
+
+        /* ===== GRANTS ===== */
+        .grant-item {
+            padding: 14px 20px; margin-bottom: 14px;
+            background: var(--surface); border-radius: 10px;
+        }
+        .grant-item .year { font-size: 0.82rem; color: var(--accent); font-weight: 600; }
+        .grant-item .desc { font-size: 0.9rem; color: var(--ink); margin-top: 4px; }
+
+        /* ===== TEACHING ===== */
+        .teaching-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+        }
+        .teaching-col h3 { margin-top: 0; }
+        .teaching-col ul {
+            list-style: none; padding: 0;
+        }
+        .teaching-col li {
+            padding: 8px 0; font-size: 0.9rem; color: var(--ink);
+            border-bottom: 1px solid var(--rule);
+        }
+        .teaching-col li:last-child { border-bottom: none; }
+
+        /* ===== PUBLICATIONS ===== */
+        .pub-section { margin-bottom: 24px; }
+        .pub-section h3 { font-size: 1rem; }
+        .pub-item {
+            padding: 10px 0; font-size: 0.9rem; color: var(--ink);
+            border-bottom: 1px solid var(--rule);
+        }
+        .pub-item:last-child { border-bottom: none; }
+        .pub-item .pub-title { color: #fff; font-style: italic; }
+        .pub-item .pub-info { font-size: 0.82rem; color: var(--muted); margin-top: 3px; }
+
+        /* ===== PRESENTATIONS ===== */
+        .pres-item {
+            padding: 10px 20px; margin-bottom: 10px;
+            background: var(--surface); border-radius: 8px;
+            font-size: 0.9rem;
+        }
+        .pres-item .pres-title { color: #fff; }
+        .pres-item .pres-info { font-size: 0.82rem; color: var(--muted); margin-top: 3px; }
+
+        /* ===== AFFILIATIONS ===== */
+        .aff-item {
+            padding: 8px 0; font-size: 0.9rem; color: var(--ink);
+            border-bottom: 1px solid var(--rule);
+        }
+        .aff-item:last-child { border-bottom: none; }
+
+        /* ===== FOOTER ===== */
         footer {
-            margin-top: 60px;
-            font-size: 0.8rem;
-            color: #555577;
+            text-align: center; padding: 40px 24px;
+            font-size: 0.8rem; color: #555577;
+            border-top: 1px solid var(--rule);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 600px) {
+            .hero { padding: 50px 16px 40px; }
+            .hero h1 { font-size: 1.6rem; }
+            .teaching-grid { grid-template-columns: 1fr; }
+            nav { gap: 4px; }
+            nav a { padding: 5px 10px; font-size: 0.8rem; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="avatar">A</div>
-        <h1>Aihua Xie</h1>
-        <p class="subtitle">Welcome to my personal page</p>
 
-        <div class="bio">
-            <p>Hi, I'm Aihua Xie. I'm passionate about technology and learning new things.</p>
-            <p style="margin-top: 12px;">This page is under construction. More content coming soon!</p>
-        </div>
-
-        <div class="links">
-            <a href="https://github.com/phireli2000-tech" class="github" target="_blank">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
-                </svg>
-                GitHub
-            </a>
-        </div>
-
-        <p class="section-title">More to come</p>
-
-        <footer>
-            <p>&copy; 2026 Aihua Xie. Built with ❤️</p>
-        </footer>
+<!-- ===== HERO ===== -->
+<header class="hero">
+    <div class="avatar">X</div>
+    <h1>Prof. Aihua Xie</h1>
+    <p class="title">Professor of Philosophy</p>
+    <p>School of Philosophy and Religious Studies, Minzu University of China, Beijing</p>
+    <div class="contact">
+        <span>Email: <a href="mailto:phireli2009@sina.com">phireli2009@sina.com</a></span>
+        <span>Tel: 86-10-68932634</span>
+        <span>Mobile: 86-13911705082</span>
     </div>
+    <div class="links">
+        <a href="https://github.com/phireli2000-tech" target="_blank">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+            GitHub
+        </a>
+    </div>
+</header>
+
+<!-- ===== NAV ===== -->
+<nav>
+    <a href="#education">Education</a>
+    <a href="#employment">Employment</a>
+    <a href="#specializations">Specializations</a>
+    <a href="#grants">Grants</a>
+    <a href="#teaching">Teaching</a>
+    <a href="#publications">Publications</a>
+    <a href="#presentations">Presentations</a>
+    <a href="#affiliations">Affiliations</a>
+</nav>
+
+<div class="content">
+
+    <!-- ===== EDUCATION ===== -->
+    <section id="education">
+        <h2>Education</h2>
+
+        <div class="edu-item">
+            <div class="period">1997 &ndash; 2000</div>
+            <div class="school">Chinese Academy of Social Sciences &mdash; Ph.D. in Philosophy of Science</div>
+            <div class="supervisor">Supervisors: Prof. Liu Ji &amp; Prof. Jin Wulun</div>
+        </div>
+
+        <div class="edu-item">
+            <div class="period">1988 &ndash; 1991</div>
+            <div class="school">Huazhong University of Science and Technology &mdash; Master in Philosophy</div>
+            <div class="supervisor">Supervisor: Prof. Huang Jinnan</div>
+        </div>
+
+        <div class="edu-item">
+            <div class="period">1984 &ndash; 1988</div>
+            <div class="school">Huazhong University of Science and Technology &mdash; B.Sc. in Physics</div>
+        </div>
+    </section>
+
+    <!-- ===== EMPLOYMENT ===== -->
+    <section id="employment">
+        <h2>Employment</h2>
+
+        <div class="emp-item">
+            <div class="period">2009 &ndash; Present</div>
+            <div class="role">Professor of Philosophy</div>
+            <div class="place">School of Philosophy and Religious Studies, Minzu University of China, Beijing</div>
+        </div>
+
+        <div class="emp-item">
+            <div class="period">2006 &ndash; 2007</div>
+            <div class="role">Visiting Professor</div>
+            <div class="place">Department of Philosophy, Boston University, MA, USA</div>
+        </div>
+
+        <div class="emp-item">
+            <div class="period">2000 &ndash; Present</div>
+            <div class="role">Faculty Member</div>
+            <div class="place">School of Philosophy and Religious Studies, Minzu University of China, Beijing</div>
+        </div>
+
+        <div class="emp-item">
+            <div class="period">1991 &ndash; 1997</div>
+            <div class="role">Faculty Member</div>
+            <div class="place">Department of Philosophy, Huazhong University of Science and Technology, Hubei</div>
+        </div>
+    </section>
+
+    <!-- ===== SPECIALIZATIONS ===== -->
+    <section id="specializations">
+        <h2>Areas of Specialization</h2>
+        <div class="tags">
+            <span class="tag">Philosophy of Science and Technology</span>
+            <span class="tag">Modern Western Philosophy</span>
+            <span class="tag">Philosophy of Language</span>
+            <span class="tag">Philosophy of Religion</span>
+            <span class="tag">Science and Religion</span>
+            <span class="tag">Marxist Philosophy</span>
+            <span class="tag">Comparative Philosophy</span>
+        </div>
+    </section>
+
+    <!-- ===== GRANTS ===== -->
+    <section id="grants">
+        <h2>Scholarships, Fellowships &amp; Grants</h2>
+
+        <div class="grant-item">
+            <div class="year">2010 &ndash; 2016</div>
+            <div class="desc">Research Project on &ldquo;The Relationship Between Science and Religion&rdquo;, Sponsored by National Funds of Social Sciences of China (Project No. 10BZJ028).</div>
+        </div>
+
+        <div class="grant-item">
+            <div class="year">2006 &ndash; 2007</div>
+            <div class="desc">Visiting Scholar, Department of Philosophy, Boston University, MA, USA. Sponsored by National Scholarship Council of China.</div>
+        </div>
+
+        <div class="grant-item">
+            <div class="year">2004</div>
+            <div class="desc">Intensive Courses on Studies of Western Culture, Chinese University of Hong Kong (CUHK). Sponsored by CUHK.</div>
+        </div>
+    </section>
+
+    <!-- ===== TEACHING ===== -->
+    <section id="teaching">
+        <h2>Teaching Courses</h2>
+        <div class="teaching-grid">
+            <div class="teaching-col">
+                <h3>Undergraduate</h3>
+                <ul>
+                    <li>Philosophy of Science and Technology</li>
+                    <li>History of Science and Technology</li>
+                    <li>Modern Western Philosophy</li>
+                    <li>The Relationship of Science and Religion</li>
+                    <li>Philosophy of Language (in English)</li>
+                    <li>Selected Readings on Philosophy of Science (in English)</li>
+                </ul>
+            </div>
+            <div class="teaching-col">
+                <h3>Graduate</h3>
+                <ul>
+                    <li>Philosophy of Science and Technology (in English)</li>
+                    <li>Modern Western Philosophy</li>
+                    <li>The Relationship of Science and Religion</li>
+                    <li>Selected Readings on Philosophy of Science (in English)</li>
+                    <li>Philosophy of Language (in English)</li>
+                    <li>Thematic Studies on Marxist Philosophy</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PUBLICATIONS ===== -->
+    <section id="publications">
+        <h2>Main Publications</h2>
+
+        <div class="pub-section">
+            <h3>Books</h3>
+
+            <div class="pub-item">
+                <span class="pub-title">Philosophical Questions in The Theory of Emergence</span>
+                <span class="pub-info">&#x300A;&#x7A81;&#x73B0;&#x8BBA;&#x4E2D;&#x7684;&#x54F2;&#x5B66;&#x95EE;&#x9898;&#x300B; (in Chinese). The Press of Minzu University of China, Beijing, 2006.</span>
+            </div>
+
+            <div class="pub-item">
+                <span class="pub-title">The World of the Tibetan Ideas and Culture</span>
+                <span class="pub-info">&#x300A;&#x85CF;&#x65CF;&#x601D;&#x60F3;&#x6587;&#x5316;&#x7684;&#x4E16;&#x754C;&#x300B; (co-authored, in Chinese). Religion and Culture Publisher, Beijing, 2023.</span>
+            </div>
+
+            <div class="pub-item">
+                <span class="pub-title">The Moon and the Finger</span>
+                <span class="pub-info">&#x300A;&#x6708;&#x4EAE;&#x4E0E;&#x624B;&#x6307;&#x300B; (Chinese translation from English; originally in Italian by Angelo Tartaglia). The Renmin Press of China, Beijing, 2017.</span>
+            </div>
+        </div>
+
+        <div class="pub-section">
+            <h3>Selected Articles</h3>
+
+            <div class="pub-item">
+                <span class="pub-title">Out of the Cave: Leo Strauss and the Modernity Crisis</span>
+                <span class="pub-info">&#x300A;&#x9003;&#x79BB;&#x6D1E;&#x7A74;&#xFF1A;&#x5217;&#x5965;&#xB7;&#x65BD;&#x7279;&#x52B3;&#x65AF;&#x4E0E;&#x73B0;&#x4EE3;&#x6027;&#x5371;&#x673A;&#x300B;. Collected Papers of the Conference of the Classic Philosophy and Chinese Modernization, Beijing, 2023.</span>
+            </div>
+
+            <div class="pub-item">
+                <span class="pub-title">The Piety of Thought: Heidegger Inquiring into Modern Technology</span>
+                <span class="pub-info">&#x300A;&#x601D;&#x4E4B;&#x8654;&#x8BDA;&#xFF1A;&#x6D77;&#x5FB7;&#x683C;&#x5C14;&#x5BF9;&#x73B0;&#x4EE3;&#x6280;&#x672F;&#x7684;&#x8FFD;&#x95EE;&#x300B;. Collected Papers of the 9th National Classics Conference, Hainan, 2022.</span>
+            </div>
+
+            <div class="pub-item">
+                <span class="pub-title">From Enlightenment to Post-secular Society: Development and Characteristic of Western Religions</span>
+                <span class="pub-info">&#x300A;&#x4ECE;&#x542F;&#x8499;&#x8FD0;&#x52A8;&#x5230;&#x540E;&#x4E16;&#x4FD7;&#x5316;&#x793E;&#x4F1A;&#x300B;. Journal of Central Socialist University, Beijing, 2020.</span>
+            </div>
+
+            <div class="pub-item">
+                <span class="pub-title">The Universality of Philosophical Hermeneutics and Interreligious Dialogue</span>
+                <span class="pub-info">&#x300A;&#x54F2;&#x5B66;&#x8BE0;&#x91CA;&#x5B66;&#x7684;&#x666E;&#x904D;&#x6027;&#x4E0E;&#x5B97;&#x6559;&#x95F4;&#x5BF9;&#x8BDD;&#x300B;. Journal of Philosophy of Religion, Taiwan, 2018.</span>
+            </div>
+
+            <div class="pub-item">
+                <span class="pub-title">Quantum Mechanics and the Concept of Emptiness in Zhongguan (Middle Way) Buddhism</span>
+                <span class="pub-info">&#x300A;&#x91CF;&#x5B50;&#x529B;&#x5B66;&#x4E0E;&#x4E2D;&#x89C2;&#x4F5B;&#x6559;&#x7684;&#x7A7A;&#x6027;&#x89C2;&#x300B;. Fayin (Journal of Chinese Buddhism), Beijing, 2018.</span>
+            </div>
+
+            <div class="pub-item">
+                <span class="pub-title">Life Confucianism and the Third Revival of Confucianism in China</span>
+                <span class="pub-info">&#x300A;&#x751F;&#x6D3B;&#x5112;&#x5B66;&#x4E0E;&#x5112;&#x5B66;&#x5728;&#x4E2D;&#x56FD;&#x7684;&#x7B2C;&#x4E09;&#x671F;&#x590D;&#x5174;&#x300B;. Journal of Shandong University (Humanity and Social Sciences), Shandong, 2017.</span>
+            </div>
+
+            <div class="pub-item">
+                <span class="pub-title">Nature and Normativity: The Dilemma in the Turning Towards Naturalism of Contemporary Philosophy of Science</span>
+                <span class="pub-info">&#x300A;&#x81EA;&#x7136;&#x4E0E;&#x89C4;&#x8303;&#xFF1A;&#x5F53;&#x4EE3;&#x79D1;&#x5B66;&#x54F2;&#x5B66;&#x81EA;&#x7136;&#x4E3B;&#x4E49;&#x8F6C;&#x5411;&#x7684;&#x4E24;&#x96BE;&#x56F0;&#x5883;&#x300B;. Studies in Dialectics of Nature, Vol.33, No.4, Beijing, 2017.</span>
+            </div>
+
+            <div class="pub-item">
+                <span class="pub-title">New Physics and the Genesis Theory of Cosmology of Laozi</span>
+                <span class="pub-info">&#x300A;&#x65B0;&#x7269;&#x7406;&#x5B66;&#x4E0E;&#x8001;&#x5B50;&#x7684;&#x751F;&#x6210;&#x8BBA;&#x5B87;&#x5B99;&#x89C2;&#x300B;. China Taoism, Vol.158, No.4, Beijing, 2017.</span>
+            </div>
+
+            <div class="pub-item">
+                <span class="pub-title">Science and Religion: From Conflict to Dialogue</span>
+                <span class="pub-info">&#x300A;&#x79D1;&#x5B66;&#x4E0E;&#x5B97;&#x6559;&#xFF1A;&#x4ECE;&#x51B2;&#x7A81;&#x8D70;&#x5411;&#x5BF9;&#x8BDD;&#x300B;. Journal of Nanjing Institute of Technology (Social Sciences), Vol.25, No.133, Jiangsu, 2012.</span>
+            </div>
+
+            <div class="pub-item">
+                <span class="pub-title">The Relationship of Science and Religion on the Perspective of Post-modernism</span>
+                <span class="pub-info">Asian Social Sciences, Vol.5, No.4, Canada, 2009.</span>
+            </div>
+
+            <div class="pub-item">
+                <span class="pub-title">A Paradigm of the Theory of Emergence</span>
+                <span class="pub-info">&#x300A;&#x4F5C;&#x4E3A;&#x8303;&#x5F0F;&#x7684;&#x7A81;&#x73B0;&#x6A21;&#x578B;&#x300B;. Journal of System Science, Vol.17, No.3, Beijing, 2009.</span>
+            </div>
+
+            <div class="pub-item">
+                <span class="pub-title">Two Approaches to Complex Systems</span>
+                <span class="pub-info">&#x300A;&#x590D;&#x6742;&#x7CFB;&#x7EDF;&#x7684;&#x9690;&#x55BB;&#x63CF;&#x8FF0;&#x4E0E;&#x6A21;&#x578B;&#x63CF;&#x8FF0;&#x300B;. Studies in Dialectics of Nature, No.11, Beijing, 2005.</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PRESENTATIONS ===== -->
+    <section id="presentations">
+        <h2>International Presentations</h2>
+
+        <div class="pres-item">
+            <div class="pres-title">The Theory of Big Bang and Christian Creationism</div>
+            <div class="pres-info">Mokwon University, South Korea, 2013</div>
+        </div>
+
+        <div class="pres-item">
+            <div class="pres-title">The Relationship of Science and Religion in China</div>
+            <div class="pres-info">Birmingham University, UK, 2012</div>
+        </div>
+
+        <div class="pres-item">
+            <div class="pres-title">The Relationship of Science and Religion on the Perspective of Post-modernism</div>
+            <div class="pres-info">Claremont Graduate School, CA, USA, 2011</div>
+        </div>
+    </section>
+
+    <!-- ===== AFFILIATIONS ===== -->
+    <section id="affiliations">
+        <h2>Professional Affiliations</h2>
+
+        <div class="aff-item">Member of Executive Council of Studies of Dialectics in Nature of China</div>
+        <div class="aff-item">Member of Executive Council of Association of Philosophy in Beijing</div>
+        <div class="aff-item">Member of Comparative Scripture and Interreligious Dialogue, Minzu University of China</div>
+    </section>
+
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+    <p>&copy; 2026 Aihua Xie &mdash; School of Philosophy and Religious Studies, Minzu University of China</p>
+</footer>
+
 </body>
 </html>
